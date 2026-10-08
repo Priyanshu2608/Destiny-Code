@@ -46,9 +46,12 @@ export function Hero() {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.8, ease }}
-        className="pointer-events-none absolute -right-40 top-16 w-[560px] opacity-40 sm:-right-24 sm:w-[640px] lg:right-[-4%] lg:top-1/2 lg:w-[min(52vw,760px)] lg:-translate-y-1/2 lg:opacity-100"
+        className="pointer-events-none absolute -right-44 top-10 w-[520px] sm:-right-24 sm:w-[640px] lg:right-[-4%] lg:top-1/2 lg:w-[min(52vw,760px)] lg:-translate-y-1/2"
       >
-        <Astrolabe className="h-auto w-full drop-shadow-[0_0_40px_rgb(217_182_108/0.15)]" />
+        {/* Dimmed behind the text on small screens, full strength beside it on desktop */}
+        <div className="opacity-[0.22] sm:opacity-30 lg:opacity-100">
+          <Astrolabe className="h-auto w-full drop-shadow-[0_0_40px_rgb(217_182_108/0.15)]" />
+        </div>
       </motion.div>
 
       <div className="relative mx-auto max-w-6xl px-5">

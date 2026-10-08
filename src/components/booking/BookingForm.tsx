@@ -73,6 +73,9 @@ const todayISO = () => {
   return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
 };
 
+const formatDate = (iso: string) =>
+  new Date(`${iso}T00:00:00`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+
 const noSubscribe = () => () => {};
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -109,8 +112,19 @@ function validate(v: Values, today?: string): Errors {
 
 const groups: Discipline[] = ["numerology", "astrology", "combo"];
 
-export function BookingForm({ initialService = "" }: { initialService?: string }) {
-  const [values, setValues] = useState<Values>({ ...empty, service: initialService });
+/** ?service= from the address bar; empty during the static prerender. */
+const readServiceParam = () => new URLSearchParams(window.location.search).get("service") ?? "";
+
+export function BookingForm() {
+  const [values, setValues] = useState<Values>(empty);
+  // Pre-select the reading from "Book Now" links (/booking?service=slug).
+  // The page stays fully static; the choice is applied once the browser has the URL.
+  const urlService = useSyncExternalStore(noSubscribe, readServiceParam, () => "");
+  const [appliedParam, setAppliedParam] = useState("");
+  if (urlService !== appliedParam) {
+    setAppliedParam(urlService);
+    if (getService(urlService)) setValues((prev) => ({ ...prev, service: urlService }));
+  }
   const [touched, setTouched] = useState<Partial<Record<keyof Values, boolean>>>({});
   const [submitted, setSubmitted] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "done">("idle");
@@ -195,7 +209,7 @@ export function BookingForm({ initialService = "" }: { initialService?: string }
               <dl className="divide-y divide-line/60">
               {[
                 [booking.success.labels.service, service?.name],
-                [booking.success.labels.when, `${values.date} · ${values.time}`],
+                [booking.success.labels.when, `${formatDate(values.date)} · ${values.time}`],
                 [booking.success.labels.mode, booking.modes.find((m) => m.value === values.mode)?.label],
               ].map(([k, v]) => (
                 <div key={k} className="flex justify-between gap-4 px-5 py-3">

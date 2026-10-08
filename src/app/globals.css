@@ -65,16 +65,18 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--palette-night-deep);
   color-scheme: dark;
-}
-
-body {
-  background:
+  min-height: 100%;
+  /* On <html> (not <body>) so the fixed star field can sit between it and the content */
+  background-color: var(--palette-night-deep);
+  background-image:
     radial-gradient(1200px 700px at 85% -10%, color-mix(in oklab, var(--palette-aura) 28%, transparent), transparent 60%),
     radial-gradient(900px 600px at -10% 30%, color-mix(in oklab, var(--palette-aura) 14%, transparent), transparent 60%),
     linear-gradient(180deg, var(--palette-night) 0%, var(--palette-night-deep) 100%);
   background-attachment: fixed;
+}
+
+body {
   color: var(--palette-cream);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -93,30 +95,32 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-::selection {
-  background: var(--palette-gold);
-  color: var(--palette-night-deep);
-}
+@layer base {
+  ::selection {
+    background: var(--palette-gold);
+    color: var(--palette-night-deep);
+  }
 
-:focus-visible {
-  outline: 2px solid var(--palette-gold-soft);
-  outline-offset: 3px;
-  border-radius: 6px;
-}
+  :focus-visible {
+    outline: 2px solid var(--palette-gold-soft);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
 
-[id] {
-  scroll-margin-top: 7.5rem;
-}
+  [id] {
+    scroll-margin-top: 7.5rem;
+  }
 
-h1, h2, h3, h4 {
-  font-family: var(--font-display);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  text-wrap: balance;
-}
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
 
-p {
-  text-wrap: pretty;
+  p {
+    text-wrap: pretty;
+  }
 }
 
 /* ── Utilities ────────────────────────────────────────────── */

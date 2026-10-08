@@ -29,12 +29,27 @@ export function LinkButton({
   className = "",
   ...props
 }: Props & ComponentProps<typeof Link>) {
-  return (
-    <Link className={`${base} ${styles[variant]} ${className}`} {...props}>
+  const inner = (
+    <>
       <span className="relative">{children}</span>
       {arrow && (
         <ArrowRight size={18} className="relative transition-transform duration-300 group-hover:translate-x-1" />
       )}
+    </>
+  );
+  const cls = `${base} ${styles[variant]} ${className}`;
+  // External links (Instagram, WhatsApp, mailto) use a plain anchor
+  if (typeof props.href === "string" && /^(https?:|mailto:|tel:)/.test(props.href)) {
+    const { href, ...rest } = props;
+    return (
+      <a href={href} className={cls} {...(rest as ComponentProps<"a">)}>
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <Link className={cls} {...props}>
+      {inner}
     </Link>
   );
 }

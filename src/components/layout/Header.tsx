@@ -93,7 +93,7 @@ export function Header() {
           </nav>
 
           <div className="flex shrink-0 items-center gap-2">
-            <LinkButton href="/booking" className="hidden px-5! py-2.5! text-sm! sm:inline-flex">
+            <LinkButton href="/booking" className="px-4! py-2.5! text-sm! sm:px-5!">
               {ctas.short}
             </LinkButton>
             <button

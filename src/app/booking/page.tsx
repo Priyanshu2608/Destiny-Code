@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
-import { booking, ctas, faqs, getService, site, whatsappLink } from "@/content/site";
+import { booking, ctas, faqs, site, whatsappLink } from "@/content/site";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { BookingForm } from "@/components/booking/BookingForm";
@@ -12,14 +11,7 @@ export const metadata: Metadata = {
   description: `Book a personal numerology or astrology reading with ${site.consultantName}. Online sessions by video, audio or WhatsApp call.`,
 };
 
-/** Reads ?service= so "Book Now" buttons arrive with that reading pre-selected. */
-async function PreselectedForm({ searchParams }: Pick<PageProps<"/booking">, "searchParams">) {
-  const { service } = await searchParams;
-  const initial = getService(typeof service === "string" ? service : undefined)?.slug ?? "";
-  return <BookingForm initialService={initial} />;
-}
-
-export default function BookingPage({ searchParams }: PageProps<"/booking">) {
+export default function BookingPage() {
   return (
     <>
       <section className="pb-12 pt-32 sm:pt-40">
@@ -29,9 +21,7 @@ export default function BookingPage({ searchParams }: PageProps<"/booking">) {
       </section>
 
       <div className="mx-auto grid max-w-6xl gap-6 px-5 lg:grid-cols-[1.6fr_1fr] lg:items-start">
-        <Suspense fallback={<BookingForm />}>
-          <PreselectedForm searchParams={searchParams} />
-        </Suspense>
+        <BookingForm />
 
         <aside className="space-y-6 lg:sticky lg:top-28">
           <InfoCard icon={<Video size={20} />} title={booking.consultation.title}>

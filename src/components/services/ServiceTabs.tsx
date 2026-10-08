@@ -10,6 +10,16 @@ const order: Discipline[] = ["numerology", "astrology", "combo"];
 export function ServiceTabs() {
   const [active, setActive] = useState<Discipline>("numerology");
 
+  // Deep links like /services#name-numerology: the browser's own jump can be
+  // interrupted while the page hydrates, so land on the target once mounted.
+  useEffect(() => {
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    const target = id && document.getElementById(id);
+    if (!target) return;
+    const timer = setTimeout(() => target.scrollIntoView({ behavior: "instant", block: "start" }), 60);
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     const sections = order.map((d) => document.getElementById(d)).filter(Boolean) as HTMLElement[];
     const io = new IntersectionObserver(
