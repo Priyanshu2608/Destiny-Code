@@ -22,8 +22,10 @@ export default function OpengraphImage() {
           fontFamily: "serif",
         }}
       >
-        <div style={{ display: "flex", width: 140, height: 140, borderRadius: 999, border: "2px solid #d9b66c", alignItems: "center", justifyContent: "center", fontSize: 72, color: "#d9b66c" }}>
-          ✦
+        <div style={{ display: "flex", width: 140, height: 140, borderRadius: 999, border: "2px solid #d9b66c", alignItems: "center", justifyContent: "center" }}>
+          <svg width="80" height="80" viewBox="0 0 24 24">
+            <path fill="#d9b66c" d="M12 2c.7 5.4 2.2 8.1 9 10-6.8 1.9-8.3 4.6-9 10-.7-5.4-2.2-8.1-9-10 6.8-1.9 8.3-4.6 9-10Z" />
+          </svg>
         </div>
         <div style={{ marginTop: 40, fontSize: 76 }}>{site.businessName}</div>
         <div style={{ marginTop: 16, fontSize: 34, color: "#d9b66c", letterSpacing: 6 }}>NUMEROLOGY · ASTROLOGY</div>

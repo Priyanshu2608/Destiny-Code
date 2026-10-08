@@ -57,7 +57,7 @@ export const site = {
   instagramUrl: "https://instagram.com/[INSTAGRAM HANDLE]",
   location: "[CITY, COUNTRY] · Sessions held online worldwide",
   responseTime: "[24–48 hours]",
-  copyrightYear: new Date().getFullYear(),
+  copyrightYear: 2026,
 };
 
 export const whatsappLink = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(
@@ -598,14 +598,33 @@ export const booking = {
     messagePlaceholder: "Is there a particular question or area you'd like to focus on?",
     consent: "I understand that readings are for guidance and self-reflection only, and I have read the",
     consentLink: "disclaimer",
+    noService: "Choose a reading above and the form will ask only for the birth details it needs.",
+    partnerIntro: "Compatibility readings need the same details for the second person.",
     submit: "Request booking",
     submitting: "Sending…",
     required: "Required",
+  },
+  errors: {
+    fullName: "Please enter your full name.",
+    email: "Please enter a valid email address.",
+    phone: "Please enter a valid phone number, including country code.",
+    service: "Please choose a reading.",
+    birthName: "Please enter the full name at birth.",
+    dob: "Please enter a valid date of birth.",
+    tob: "Please enter the time of birth, or tick the box if it's unknown.",
+    pob: "Please enter the place of birth.",
+    partnerName: "Please enter your partner's name.",
+    date: "Please choose a date from today onwards.",
+    time: "Please choose a preferred time.",
+    consent: "Please confirm you've read the disclaimer.",
+    summary: "Please check the highlighted fields.",
   },
   success: {
     title: "Thank you, your request is in",
     text: `I've received your booking request and will be in touch within ${site.responseTime} by email or WhatsApp to confirm your time and share payment details.`,
     again: "Make another booking",
+    summaryTitle: "Your request",
+    labels: { service: "Reading", when: "Preferred time", mode: "Mode" },
   },
   consultation: {
     title: "Online consultations",
@@ -685,6 +704,7 @@ export const disclaimer = {
     "Readings are offered for guidance and self-reflection only and are not a substitute for medical, legal, financial or psychological advice.",
   title: "Disclaimer",
   updated: "Last updated: [DATE]",
+  pendingTag: "Final wording pending",
   paragraphs: [
     `The numerology and astrology readings offered by ${site.businessName} are intended for guidance, self-reflection and personal insight only.`,
     "Readings do not predict guaranteed outcomes and should not be relied on as the sole basis for important decisions. You remain fully responsible for the choices you make.",
@@ -707,6 +727,7 @@ export const footer = {
 };
 
 export const notFound = {
+  metaTitle: "Page not found",
   title: "This path isn't in the stars",
   text: "The page you were looking for doesn't exist or has moved.",
   cta: "Back to home",
@@ -738,4 +759,5 @@ export const ui = {
   photoPlaceholder: "Photo",
   logoPlaceholder: "Logo",
   jumpTo: "Jump to",
+  serviceCategories: "Service categories",
 };

@@ -2,12 +2,15 @@
 
 import { motion, type HTMLMotionProps } from "framer-motion";
 
-type Props = HTMLMotionProps<"div"> & { delay?: number; y?: number };
+const tags = { div: motion.div, li: motion.li };
+
+type Props = HTMLMotionProps<"div"> & { delay?: number; y?: number; as?: keyof typeof tags };
 
 /** Fades and lifts its children into view once, as they scroll in. */
-export function Reveal({ delay = 0, y = 18, children, ...props }: Props) {
+export function Reveal({ delay = 0, y = 18, as = "div", children, ...props }: Props) {
+  const Tag = tags[as] as typeof motion.div;
   return (
-    <motion.div
+    <Tag
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
@@ -15,6 +18,6 @@ export function Reveal({ delay = 0, y = 18, children, ...props }: Props) {
       {...props}
     >
       {children}
-    </motion.div>
+    </Tag>
   );
 }
