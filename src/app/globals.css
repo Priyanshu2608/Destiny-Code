@@ -1,26 +1,246 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────
+   THEME TOKENS: swap the palette here and the whole site follows.
+   Fonts are chosen in src/lib/fonts.ts.
+   ───────────────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Base: deep midnight / indigo */
+  --palette-night-deep: #05061a;
+  --palette-night: #0a0c24;
+  --palette-surface: #11143a;
+  --palette-raised: #191d4a;
+  --palette-line: #2a2f66;
+  --palette-aura: #4a4fb8;
+
+  /* Accent: warm gold */
+  --palette-gold-soft: #f0dba8;
+  --palette-gold: #d9b66c;
+  --palette-gold-deep: #a9843f;
+
+  /* Text: soft cream */
+  --palette-cream: #f6eedd;
+  --palette-muted: #d2c8b4;
+  --palette-faint: #a39c90;
+
+  /* Feedback */
+  --palette-danger: #f4a897;
+  --palette-success: #a8dcc0;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-night-deep: var(--palette-night-deep);
+  --color-night: var(--palette-night);
+  --color-surface: var(--palette-surface);
+  --color-raised: var(--palette-raised);
+  --color-line: var(--palette-line);
+  --color-aura: var(--palette-aura);
+  --color-gold-soft: var(--palette-gold-soft);
+  --color-gold: var(--palette-gold);
+  --color-gold-deep: var(--palette-gold-deep);
+  --color-cream: var(--palette-cream);
+  --color-muted: var(--palette-muted);
+  --color-faint: var(--palette-faint);
+  --color-danger: var(--palette-danger);
+  --color-success: var(--palette-success);
+
+  --font-display: var(--font-display-face), "Times New Roman", serif;
+  --font-sans: var(--font-body-face), system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme {
+  --animate-spin-slow: spin 240s linear infinite;
+  --animate-spin-slower: spin 360s linear infinite reverse;
+  /* counter-rotates labels inside the reverse ring so they stay upright */
+  --animate-counter: spin 360s linear infinite;
+  --animate-twinkle: twinkle 6s ease-in-out infinite;
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.25; }
+    50% { opacity: 1; }
   }
 }
 
+/* ── Base ─────────────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+  background: var(--palette-night-deep);
+  color-scheme: dark;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(1200px 700px at 85% -10%, color-mix(in oklab, var(--palette-aura) 28%, transparent), transparent 60%),
+    radial-gradient(900px 600px at -10% 30%, color-mix(in oklab, var(--palette-aura) 14%, transparent), transparent 60%),
+    linear-gradient(180deg, var(--palette-night) 0%, var(--palette-night-deep) 100%);
+  background-attachment: fixed;
+  color: var(--palette-cream);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Fine film grain over everything: stops flat dark UI looking plasticky */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--palette-gold);
+  color: var(--palette-night-deep);
+}
+
+:focus-visible {
+  outline: 2px solid var(--palette-gold-soft);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+[id] {
+  scroll-margin-top: 7.5rem;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* ── Utilities ────────────────────────────────────────────── */
+
+/* Light-catching glass panel with a bright top-edge hairline */
+@utility glass {
+  background:
+    linear-gradient(155deg,
+      color-mix(in oklab, var(--palette-raised) 70%, transparent) 0%,
+      color-mix(in oklab, var(--palette-surface) 45%, transparent) 55%,
+      color-mix(in oklab, var(--palette-night-deep) 40%, transparent) 100%);
+  border: 1px solid color-mix(in oklab, var(--palette-line) 80%, transparent);
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in oklab, var(--palette-gold-soft) 14%, transparent),
+    0 20px 50px -25px rgb(0 0 0 / 0.6);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+/* Gold gradient text */
+@utility text-gilded {
+  background: linear-gradient(100deg, var(--palette-gold-soft) 0%, var(--palette-gold) 45%, var(--palette-gold-deep) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Thin gold rule that fades at both ends */
+@utility rule-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--palette-gold) 50%, transparent);
+  opacity: 0.55;
+}
+
+/* Cursor-following glow (see components/ui/Spotlight.tsx) */
+@utility spotlight {
+  position: relative;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%),
+        color-mix(in oklab, var(--palette-gold) 14%, transparent), transparent 55%);
+  }
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+/* Gentle light sweep across the primary button on hover */
+@utility shine {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-120%) skewX(-20deg);
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.45), transparent);
+    transition: transform 0.8s ease;
+  }
+  &:hover::after {
+    transform: translateX(120%) skewX(-20deg);
+  }
+}
+
+/* Form inputs share one look */
+@utility field {
+  width: 100%;
+  border-radius: 0.875rem;
+  border: 1px solid var(--palette-line);
+  background: color-mix(in oklab, var(--palette-night-deep) 65%, transparent);
+  padding: 0.8rem 1rem;
+  color: var(--palette-cream);
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  &::placeholder {
+    color: var(--palette-faint);
+  }
+  &:hover {
+    border-color: color-mix(in oklab, var(--palette-gold) 45%, var(--palette-line));
+  }
+  &:focus {
+    outline: none;
+    border-color: var(--palette-gold);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--palette-gold) 22%, transparent);
+  }
+  &[aria-invalid="true"] {
+    border-color: var(--palette-danger);
+  }
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.85) sepia(0.4) saturate(2) hue-rotate(5deg);
+  cursor: pointer;
+}
+
+select.field {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5l5 5 5-5' stroke='%23d9b66c' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+select.field option {
+  background: var(--palette-surface);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
