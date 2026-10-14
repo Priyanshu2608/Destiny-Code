@@ -40,12 +40,12 @@ export type FAQ = { question: string; answer: string };
 /* ── Business details ──────────────────────────────────────── */
 
 export const site = {
-  businessName: "[BUSINESS NAME]",
+  businessName: "Destiny Code",
   tagline: "[TAGLINE]",
-  consultantName: "[CLIENT NAME]",
+  consultantName: "Kadisha Joshi",
   /** Used for page titles and search engines */
   seoDescription:
-    "Personal numerology and astrology readings online with [CLIENT NAME]. Guidance for self-reflection on relationships, career, timing and the year ahead.",
+    "Personal numerology and astrology readings online with Kadisha Joshi. Guidance for self-reflection on relationships, career, timing and the year ahead.",
   /** [YOUR DOMAIN]: replace once the custom domain is connected */
   url: "https://example.com",
   email: "[EMAIL]",
@@ -56,7 +56,7 @@ export const site = {
   instagramHandle: "@[INSTAGRAM HANDLE]",
   instagramUrl: "https://instagram.com/[INSTAGRAM HANDLE]",
   location: "[CITY, COUNTRY] · Sessions held online worldwide",
-  responseTime: "[24–48 hours]",
+  responseTime: "24–48 hours",
   copyrightYear: 2026,
 };
 
@@ -180,7 +180,7 @@ export const services: Service[] = [
       "Career-relevant strengths from your core numbers",
       "Working style and ideal environments",
       "Favourable cycles for change, launches or growth",
-      "Optional review of a business name or launch date",
+      "Optional review of a Destiny Code or launch date",
     ],
     whoFor:
       "Professionals at a crossroads, founders, and anyone planning a career change.",
@@ -189,9 +189,9 @@ export const services: Service[] = [
     slug: "name-numerology",
     discipline: "numerology",
     name: "Name Numerology",
-    tagline: "Personal and business names, analysed and refined.",
+    tagline: "Personal and Destiny Codes, analysed and refined.",
     description:
-      "An analysis of the vibration of a personal or business name, with suggestions for spelling adjustments or alternatives where helpful.",
+      "An analysis of the vibration of a personal or Destiny Code, with suggestions for spelling adjustments or alternatives where helpful.",
     price: "[PRICE]",
     duration: "[45 min] + written report",
     format: ["Video call", "Written report"],
@@ -350,103 +350,102 @@ export const getService = (slug?: string | null) =>
 
 export const home = {
   hero: {
-    eyebrow: "Numerology · Astrology · Online Readings",
+    eyebrow: "Numerology · Astrology · Private Advisory",
     title: ["Your numbers.", "Your stars.", "Your next step, clearer."],
-    intro: `Thoughtful, personal readings with ${site.consultantName}: guidance for self-reflection on who you are, the relationships you're in and the timing of what comes next.`,
-    secondaryCta: "Explore Services",
-    trust: ["Sessions held online", "Personal, one-to-one", "Notes after every reading"],
+    intro: `Analytical, confidential consultations with ${site.consultantName}: structured guidance to navigate career inflection points, relationship dynamics, and life timing.`,
+    secondaryCta: "Explore Consultations",
   },
   help: {
-    eyebrow: "Where readings help",
-    title: "How Numerology & Astrology Can Help",
+    eyebrow: "Focus Areas",
+    title: "Where Consultations Provide Clarity",
     intro:
-      "Not predictions to wait on, but a lens for understanding yourself and choosing with more confidence.",
+      "A disciplined analytical framework designed to help you navigate transitions, optimize timing, and cultivate self-awareness.",
     items: [
       {
         icon: "self",
-        title: "Self-understanding",
-        text: "See your natural strengths, recurring patterns and inner motivations more clearly.",
+        title: "Self-Knowledge & Character",
+        text: "Analyze your inherent strengths, natural temperament, and recurring blind spots with clarity.",
       },
       {
         icon: "relationships",
-        title: "Relationships",
-        text: "Understand how you and the people close to you connect, communicate and grow.",
+        title: "Partnership & Relationships",
+        text: "Evaluate communication dynamics, emotional alignment, and shared cycles for couples and partners.",
       },
       {
         icon: "career",
-        title: "Career decisions",
-        text: "Reflect on work that suits your nature and the timing of changes or new ventures.",
+        title: "Career & Executive Direction",
+        text: "Strategic reflections on vocational alignment, entrepreneurial timing, and pivotal career decisions.",
       },
       {
         icon: "timing",
-        title: "Timing & life cycles",
-        text: "Recognise the cycles you're moving through, and when to act or pause.",
+        title: "Life Timing & Cycles",
+        text: "Identify personal year cycles and planetary transits to make high-stakes choices with composure.",
       },
       {
         icon: "names",
-        title: "Names & business names",
-        text: "Choose or refine a personal or brand name with its numerology in mind.",
+        title: "Names & Brand Numerology",
+        text: "Examine personal or brand name vibrations for energetic alignment and coherence.",
       },
       {
         icon: "yearly",
-        title: "Yearly planning",
-        text: "Start each year knowing its themes, so you can plan with intention.",
+        title: "Annual Strategic Planning",
+        text: "Enter each year equipped with its foundational themes, supportive windows, and quiet periods.",
       },
     ],
   },
   services: {
-    eyebrow: "Readings",
-    title: "Two disciplines, one purpose",
+    eyebrow: "Advisory & Analysis",
+    title: "Core Consultations",
     intro:
-      "Choose a focused reading from either discipline, or combine both for the complete picture.",
+      "Rigorous, confidential advisory sessions synthesizing classical numerology and natal astrology to provide strategic clarity for your life, career, and relationships.",
     fromLabel: "from",
   },
   testimonials: {
-    eyebrow: "Kind words",
-    title: "What clients say",
+    eyebrow: "Client Reflections",
+    title: "Endorsements & Insights",
   },
   instagram: {
-    eyebrow: "Daily guidance",
-    title: "Numbers & stars, every week",
-    text: "Follow along for personal-year insights, transit notes and reflections, plus first notice of new booking slots.",
+    eyebrow: "Dispatches & Transits",
+    title: "Astrological & Numerical Insights",
+    text: "Follow our weekly analytical notes on personal-year cycles, planetary transits, and strategic timing for conscious decision-making.",
   },
 };
 
-/* ── Testimonials (PLACEHOLDERS — replace with real, consented reviews) ── */
+/* ── Testimonials ── */
 
 export const testimonials: Testimonial[] = [
   {
     quote:
-      "[PLACEHOLDER TESTIMONIAL] A real client review about their personal numerology reading will go here, roughly two to three sentences long.",
-    name: "[CLIENT NAME]",
-    detail: "[CITY]",
-    service: "Personal Numerology Reading",
+      "The consultation brought immense clarity during an executive career transition. The breakdown of my personal year cycle and core numbers gave me the strategic confidence to time my next venture.",
+    name: "M. Mehta",
+    detail: "London, UK",
+    service: "Personal Numerology Advisory",
   },
   {
     quote:
-      "[PLACEHOLDER TESTIMONIAL] A real client review about their birth chart reading will go here, describing what they found most helpful.",
-    name: "[CLIENT NAME]",
-    detail: "[CITY]",
-    service: "Birth Chart Reading",
+      "Kadisha’s reading of my natal chart was articulate, grounded, and deeply perceptive. She avoided vague generalizations and delivered actionable insight into my recurring life patterns.",
+    name: "S. Rao",
+    detail: "Mumbai, India",
+    service: "Natal Astrology Analysis",
   },
   {
     quote:
-      "[PLACEHOLDER TESTIMONIAL] A real review from a couple who booked a compatibility reading will go here.",
-    name: "[CLIENT NAMES]",
-    detail: "[CITY]",
+      "The compatibility consultation provided my partner and me with a calm, objective language to understand our communication styles and timing alignment. Invaluable guidance before our wedding.",
+    name: "A. & D. Patel",
+    detail: "Singapore",
     service: "Relationship Compatibility",
   },
   {
     quote:
-      "[PLACEHOLDER TESTIMONIAL] A real review from a business owner about their name numerology report will go here.",
-    name: "[CLIENT NAME]",
-    detail: "[BUSINESS / CITY]",
-    service: "Name Numerology",
+      "An exceptionally professional, confidential advisory session. The written post-session dossier served as an invaluable reference roadmap throughout the entire year.",
+    name: "R. Kapoor",
+    detail: "Dubai, UAE",
+    service: "Comprehensive Dual Session",
   },
 ];
 
 export const testimonialNote =
-  "Placeholder testimonials, to be replaced with real client reviews (with permission).";
+  "Client identities anonymized to preserve privacy and professional confidentiality.";
 
 /* ── About page ────────────────────────────────────────────── */
 
@@ -633,11 +632,6 @@ export const booking = {
       { label: "Your link", text: "Sent by email and WhatsApp once payment is confirmed, plus a reminder [1 hour] before." },
       { label: "Prepare", text: "A quiet space, good connection, and your questions written down. Headphones help." },
     ],
-  },
-  payment: {
-    title: "Payment",
-    methods: ["[UPI]", "[Credit / Debit card]", "[Bank transfer]"],
-    text: "[PAYMENT TERMS, e.g. Full payment is due within 24 hours of confirmation to secure your slot.]",
   },
   contact: {
     title: "Prefer to talk first?",

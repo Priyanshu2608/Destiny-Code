@@ -1,62 +1,93 @@
-import { ctas, disciplines, home, servicesBy, ui } from "@/content/site";
+import { home, services } from "@/content/site";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { DisciplineMark } from "@/components/ui/DisciplineMark";
 import { LinkButton } from "@/components/ui/Button";
-import { Astrolabe } from "@/components/ui/Astrolabe";
 import { ServiceCard } from "@/components/services/ServiceCard";
 
-export function ServicesOverview() {
-  const [combo] = servicesBy("combo");
-  return (
-    <section className="relative py-24 sm:py-32" aria-labelledby="services-title">
-      <div className="mx-auto max-w-6xl px-5">
-        <SectionHeading eyebrow={home.services.eyebrow} title={home.services.title} intro={home.services.intro} id="services-title" />
+// The 4 major foundational & signature services to feature on the homepage
+const majorServiceSlugs = [
+  "personal-numerology",
+  "birth-chart-reading",
+  "numerology-compatibility",
+  "numerology-astrology-combo",
+] as const;
 
-        <div className="mt-16 grid gap-5 lg:grid-cols-2">
-          {(["numerology", "astrology"] as const).map((d, i) => (
-            <Reveal key={d} delay={i * 0.1} className="glass relative overflow-hidden rounded-[2rem] p-3 sm:p-5">
-              <header className="relative px-4 pb-6 pt-5 sm:px-5">
-                <DisciplineMark discipline={d} className="absolute -right-6 -top-6 w-40 text-gold/20" />
-                <p className="font-display text-sm italic text-gold">{disciplines[d].numeral}.</p>
-                <h3 className="mt-1 text-4xl text-cream">{disciplines[d].title}</h3>
-                <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">{disciplines[d].intro}</p>
-              </header>
-              <div className="rule-gold mx-4" />
-              <ul className="mt-2 divide-y divide-line/50">
-                {servicesBy(d).map((s, idx) => (
-                  <li key={s.slug}>
-                    <ServiceCard service={s} index={idx} />
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          ))}
+const majorMeta: Record<
+  string,
+  { numeral: string; badge: string; tags: string[]; isFeatured?: boolean }
+> = {
+  "personal-numerology": {
+    numeral: "I",
+    badge: "Numerology Advisory",
+    tags: ["Life Path Analysis", "Core Strengths", "Personal Year Cycle"],
+  },
+  "birth-chart-reading": {
+    numeral: "II",
+    badge: "Natal Astrology",
+    tags: ["Natal Sky Analysis", "Planetary Periods", "Strategic Timing"],
+  },
+  "numerology-compatibility": {
+    numeral: "✦",
+    badge: "Partnership Advisory",
+    tags: ["Interpersonal Dynamics", "Communication", "Shared Cycles"],
+  },
+  "numerology-astrology-combo": {
+    numeral: "III",
+    badge: "Dual-System Executive Session",
+    tags: ["Comprehensive Synthesis", "Written Dossier", "1-on-1 Consultation"],
+    isFeatured: true,
+  },
+};
+
+export function ServicesOverview() {
+  const majorServices = majorServiceSlugs
+    .map((slug) => services.find((s) => s.slug === slug))
+    .filter(Boolean);
+
+  return (
+    <section className="relative py-16 sm:py-24" aria-labelledby="services-title">
+      <div className="mx-auto max-w-6xl px-5">
+        <SectionHeading
+          eyebrow={home.services.eyebrow}
+          title={home.services.title}
+          intro={home.services.intro}
+          id="services-title"
+        />
+
+        <div className="mt-12 grid gap-6 sm:grid-cols-2">
+          {majorServices.map((s, idx) => {
+            if (!s) return null;
+            const meta = majorMeta[s.slug];
+            return (
+              <Reveal key={s.slug} delay={idx * 0.08} className="h-full">
+                <ServiceCard
+                  service={s}
+                  numeral={meta?.numeral}
+                  badgeLabel={meta?.badge}
+                  tags={meta?.tags}
+                  isFeatured={meta?.isFeatured}
+                />
+              </Reveal>
+            );
+          })}
         </div>
 
-        {combo && (
-          <Reveal className="relative mt-5 overflow-hidden rounded-[2rem] border border-gold/40 bg-linear-to-br from-raised via-surface to-night-deep p-8 shadow-[0_30px_80px_-30px_rgb(217_182_108/0.35)] sm:p-12">
-            <Astrolabe uid="combo-wheel" className="pointer-events-none absolute -bottom-1/2 -right-40 w-[560px] opacity-25 sm:-right-24 sm:w-[640px] sm:opacity-45" />
-            <div className="relative max-w-xl">
-              <span className="inline-flex rounded-full bg-gold-soft px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.2em] text-night-deep">
-                {ui.mostComplete}
-              </span>
-              <p className="mt-6 font-display text-sm italic text-gold">{disciplines.combo.numeral}.</p>
-              <h3 className="mt-1 text-4xl text-cream sm:text-5xl">{combo.name}</h3>
-              <p className="mt-4 text-lg leading-relaxed text-muted">{combo.tagline}</p>
-              <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-5">
-                <p>
-                  <span className="block text-[0.65rem] uppercase tracking-[0.2em] text-faint">{home.services.fromLabel}</span>
-                  <span className="font-display text-3xl text-gold-soft">{combo.price}</span>
-                </p>
-                <LinkButton href={`/services#${combo.slug}`} variant="ghost" arrow>
-                  {ui.viewDetails}
-                </LinkButton>
-                <LinkButton href={`/booking?service=${combo.slug}`}>{ctas.short}</LinkButton>
-              </div>
+        {/* Minimal exploration strip to view full catalog & pricing without cluttering the homepage */}
+        <Reveal delay={0.3} className="mt-8">
+          <div className="flex flex-col items-center justify-between gap-5 rounded-2xl border border-line/60 bg-surface/40 p-6 text-center sm:flex-row sm:text-left">
+            <div>
+              <p className="font-display text-lg text-cream">
+                Looking for Career Astrology, Name Vibrations, or Specific Inquiries?
+              </p>
+              <p className="mt-0.5 text-xs text-muted">
+                Explore all 11 detailed consultation structures, durations, and pricing in our full catalog.
+              </p>
             </div>
-          </Reveal>
-        )}
+            <LinkButton href="/services" variant="ghost" arrow className="shrink-0 text-sm">
+              View All Consultations & Schedules
+            </LinkButton>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

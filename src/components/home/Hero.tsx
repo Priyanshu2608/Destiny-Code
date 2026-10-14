@@ -5,7 +5,6 @@ import type { PointerEvent } from "react";
 import { ctas, home, site } from "@/content/site";
 import { Astrolabe } from "@/components/ui/Astrolabe";
 import { LinkButton } from "@/components/ui/Button";
-import { Sparkle } from "@/components/ui/Icons";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -112,19 +111,7 @@ export function Hero() {
             </LinkButton>
           </motion.div>
 
-          <motion.ul
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.1 }}
-            className="mt-12 flex flex-wrap gap-x-6 gap-y-3 text-sm text-muted"
-          >
-            {home.hero.trust.map((t) => (
-              <li key={t} className="flex items-center gap-2">
-                <Sparkle size={14} className="text-gold" />
-                {t}
-              </li>
-            ))}
-          </motion.ul>
+         
         </div>
       </div>
     </section>
