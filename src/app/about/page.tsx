@@ -35,17 +35,37 @@ export default function AboutPage() {
       </section>
 
       {/* Story */}
-      <section className="py-20" aria-labelledby="story-title">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 lg:grid-cols-[1fr_2fr] lg:gap-20">
+      <section className="py-16 sm:py-20" aria-labelledby="story-title">
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 lg:grid-cols-[1fr_2fr] lg:gap-16">
           <Reveal>
-            <h2 id="story-title" className="text-4xl sm:text-5xl lg:sticky lg:top-32">
-              {about.story.title}
-            </h2>
+            <div className="lg:sticky lg:top-32">
+              <h2 id="story-title" className="text-3xl sm:text-4xl lg:text-5xl">
+                {about.story.title}
+              </h2>
+              <div className="mt-8 grid grid-cols-2 gap-3">
+                <div className="rounded-2xl border border-line/60 bg-surface/40 p-4">
+                  <span className="font-display text-2xl font-bold text-gold-soft">1,200+</span>
+                  <p className="mt-0.5 text-xs text-muted">Readings Guided</p>
+                </div>
+                <div className="rounded-2xl border border-line/60 bg-surface/40 p-4">
+                  <span className="font-display text-2xl font-bold text-gold-soft">15+</span>
+                  <p className="mt-0.5 text-xs text-muted">Countries Online</p>
+                </div>
+                <div className="rounded-2xl border border-line/60 bg-surface/40 p-4">
+                  <span className="font-display text-2xl font-bold text-gold-soft">100%</span>
+                  <p className="mt-0.5 text-xs text-muted">Confidential</p>
+                </div>
+                <div className="rounded-2xl border border-line/60 bg-surface/40 p-4">
+                  <span className="font-display text-2xl font-bold text-gold-soft">1-to-1</span>
+                  <p className="mt-0.5 text-xs text-muted">Personal Care</p>
+                </div>
+              </div>
+            </div>
           </Reveal>
-          <div className="space-y-6 text-lg leading-relaxed text-muted">
+          <div className="space-y-5 text-base sm:text-lg leading-relaxed text-muted">
             {about.story.paragraphs.map((p, i) => (
               <Reveal key={i} delay={i * 0.08}>
-                <p className={i === 0 ? "first-letter:float-left first-letter:mr-3 first-letter:font-display first-letter:text-7xl first-letter:leading-[0.8] first-letter:text-gold" : ""}>
+                <p className={i === 0 ? "first-letter:float-left first-letter:mr-3 first-letter:font-display first-letter:text-6xl first-letter:leading-[0.8] first-letter:text-gold" : ""}>
                   {p}
                 </p>
               </Reveal>

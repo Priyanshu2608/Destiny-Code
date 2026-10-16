@@ -1,4 +1,5 @@
 import { r2, seeded } from "@/lib/random";
+import { ShootingStars } from "./ShootingStars";
 
 /** Fixed, decorative star field behind every page. Deterministic so it hydrates cleanly. */
 export function StarField() {
@@ -14,6 +15,7 @@ export function StarField() {
 
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <ShootingStars />
       <svg className="h-full w-full">
         {stars.map((s, i) => (
           <circle

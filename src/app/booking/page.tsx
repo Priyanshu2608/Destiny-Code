@@ -35,16 +35,6 @@ export default function BookingPage() {
             </dl>
           </InfoCard>
 
-          <InfoCard icon={<Card size={20} />} title={booking.payment.title}>
-            <ul className="flex flex-wrap gap-2">
-              {booking.payment.methods.map((m) => (
-                <li key={m} className="rounded-full border border-gold/30 px-3 py-1 text-xs font-medium text-gold-soft">
-                  {m}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-4 text-sm leading-relaxed text-muted">{booking.payment.text}</p>
-          </InfoCard>
 
           <InfoCard icon={<Mail size={20} />} title={booking.contact.title}>
             <p className="text-sm leading-relaxed text-muted">{booking.contact.text}</p>
